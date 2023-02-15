@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Tasks</title>
+        <style>
+            table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 90%;
+            }
+            
+            td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+            }
+            
+            tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="update" method="post">
+            {% csrf_token %}
+            <!-- button to add a task -->
+            <button type="submit" formaction="add">Add Task's</button>
+            <!-- generating tasklist if the user has created tasks -->
+            {% if tasks %}
+                <br><br>
+                <table>
+                    <tr>
+                        <th>Task Details</th>
+                        <th>Actions</th>
+                    </tr>
+                    {% for key, value in tasks.items %}
+                        <tr>
+                            {% if value == 1 %}
+                                <td><s>{{ key }}</s></td>
+                            {% else %}
+                                <td>{{ key }}</td>
+                            {% endif %}
+                            <td>
+                                {% if value == 1 %}
+                                    <!-- button to mark task as incomplete -->
+                                    <button type="submit" name="mark:{{ key }}" title="Mark Incomplete">✓</button>
+                                {% else %}
+                                    <!-- button to mark task as completed -->
+                                    <button type="submit" name="mark:{{ key }}" title="Mark Completed">✓</button>
+                                {% endif %}
+                                <!-- button to edit a task -->
+                                <button type="submit" name="edit:{{ key }}">Edit</button>
+                                <!-- button to delete a task -->
+                                <button type="submit" name="delete:{{ key }}" title="Delete">X</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </form>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit Task</title>
+    </head>
+    <body>
+        <form action="save" method="post">
+            {% csrf_token %}
+            {% if txt %}
+                <input type="text" name="id:{{ txt }}" value="{{ txt }}" size=50 required> <br><br>
+                <button type="submit">Save Changes</button>
+            {% endif %}
+        </form>
+    </body>
+</html>

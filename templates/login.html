@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        {% if msg %}
+            <!-- raising alerts if a msg has been passed from the view -->
+            <script>
+                alert('{{ msg }}')
+            </script>
+        {% endif %}
+    </head>
+    <body>
+        <form action="signin" method="post">
+            {% csrf_token %}
+            <label>Please enter your user id:</label>
+            <input type="text" name="id" size=40 required> <br><br>
+            <label>Please enter your password:</label>
+            <input type="password" name="pwd" size=40 required> <br><br><br>
+            <button type="submit">Login</button> <br><br><br>
+        </form>
+    </body>
+</html>

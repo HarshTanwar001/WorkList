@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Create A Task</title>
+        <script>
+            // JS function to create a 'div' and add a button and textfield as its child nodes
+            function addMore() {
+                const div = document.createElement('div');
+
+                div.innerHTML = `
+                    <input type="text" name="id" placeholder="Enter task details:" size=50 required>
+                    <input type="button" value="-" onclick="remove(this)"/> <br><br>
+                `;
+
+                document.getElementById('data').appendChild(div);
+            }
+
+            // JS function to remove the textfield and button by removing its parent div
+            function remove(id) { 
+                document.getElementById('data').removeChild(id.parentNode);
+            }
+        </script>
+    </head>
+    <body>
+        <form action="create" method="post">
+            {% csrf_token %}
+            <button type="button" onClick="addMore()">Create Another Task</button> <br><br>
+            <div id="data">
+                <input type="text" name="id" placeholder="Enter task details:" size=50 required> <br><br>
+            </div> <br><br>
+            <button type="submit">Add To TODO List</button>
+        </form>
+    </body>
+</html>
